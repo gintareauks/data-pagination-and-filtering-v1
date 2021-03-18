@@ -3,7 +3,7 @@ Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
 
-// Search bar 
+// Display search bar 
 function displaySearchBar() {
     const searchBarHTML = `
         <label for="search" class="student-search">
@@ -20,11 +20,8 @@ function displaySearchBar() {
 
 displaySearchBar()
 
-/*
-Create the `showPage` function
-This function will create and insert/append the elements needed to display a "page" of nine students
-*/
 
+// Display a page with 9 students at most
 function showPage(list, page) {
     let startIndex = (page * 9) - 9;
     let endIndex = page * 9;
@@ -37,7 +34,7 @@ function showPage(list, page) {
                 <li class="student-item cf">
                     <div class="student-details">
                         <img class="avatar" src="${list[i].picture.thumbnail}" alt="Profile Picture">
-                        <h3 class="name">${list[i].name.title} ${list[i].name.first} ${list[i].name.last}</h3>
+                        <h3 class="name">${list[i].name.first} ${list[i].name.last}</h3>
                         <span class="email">${list[i].email}</span>
                     </div>
                     <div class="joined-details">
@@ -51,12 +48,8 @@ function showPage(list, page) {
 }
 
 
-/*
-Create the `addPagination` function
-This function will create and insert/append the elements needed for the pagination buttons
-*/
-
-function paginationButtons(list) {
+// Displays pagination buttons and shows which one is active
+function addPagination(list) {
     const numOfPages = Math.ceil(list.length / 9)
     const linkList = document.querySelector(".link-list");
     linkList.innerHTML = ''
@@ -69,8 +62,6 @@ function paginationButtons(list) {
         linkList.insertAdjacentHTML("beforeend", buttonHTML);
     }
     document.getElementsByTagName("button")[1].className = "active";
-    // firstButton.classList.add("active");
-
     
     linkList.addEventListener("click", (e) => {;
         if (e.target.tagName === "BUTTON") {
@@ -81,7 +72,7 @@ function paginationButtons(list) {
     })
 }
 
-
+// searches for the name typed
 const search = document.getElementById("search");
 const submit = document.querySelector("button");
 
@@ -95,28 +86,27 @@ function performSearch(searchInput, list) {
             filtered.push(list[i]);
         }
     }
-    // console.log(filtered);
 
     if(search.value.length == ''){
         showPage(data, 1);
-        paginationButtons(data);   
+        addPagination(data);   
     } else if (filtered.length > 0 && search.value.length > 0) {
         showPage(filtered, 1);
-        paginationButtons(filtered) 
+        addPagination(filtered) 
     } else if (filtered.length === 0 && search.value.length > 0) {
         const studentList = document.querySelector(".student-list")
         studentList.innerHTML = `<p>No results found</p>`;
-        paginationButtons(filtered);
+        addPagination(filtered);
     }
 }
 
 
-
 // Call functions
 showPage(data, 1);
-paginationButtons(data);
+addPagination(data);
 
 
+// Search made responsive
 submit.addEventListener('click', (event) => {
     event.preventDefault;
     performSearch(search, data);
