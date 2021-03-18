@@ -68,8 +68,8 @@ function paginationButtons(list) {
         `
         linkList.insertAdjacentHTML("beforeend", buttonHTML);
     }
-    const firstButton = document.getElementsByTagName("button")[0];
-    firstButton.classList.add("active");
+    document.getElementsByTagName("button")[1].className = "active";
+    // firstButton.classList.add("active");
 
     
     linkList.addEventListener("click", (e) => {;
@@ -106,21 +106,20 @@ function performSearch(searchInput, list) {
     } else if (filtered.length === 0 && search.value.length > 0) {
         const studentList = document.querySelector(".student-list")
         studentList.innerHTML = `<p>No results found</p>`;
-        paginationButtons(list);
+        paginationButtons(filtered);
     }
 }
 
 
 
 // Call functions
-
 showPage(data, 1);
 paginationButtons(data);
+
 
 submit.addEventListener('click', (event) => {
     event.preventDefault;
     performSearch(search, data);
-    
 });
 
 search.addEventListener('keyup', () => {
