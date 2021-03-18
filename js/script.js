@@ -61,7 +61,10 @@ function addPagination(list) {
         `
         linkList.insertAdjacentHTML("beforeend", buttonHTML);
     }
-    document.getElementsByTagName("button")[1].className = "active";
+    
+    if (document.getElementsByTagName("button")[1]){
+        document.getElementsByTagName("button")[1].className = "active";
+    }
     
     linkList.addEventListener("click", (e) => {;
         if (e.target.tagName === "BUTTON") {
