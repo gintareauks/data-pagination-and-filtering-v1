@@ -57,10 +57,10 @@ This function will create and insert/append the elements needed for the paginati
 */
 
 function paginationButtons(list) {
-    const numPaginationButtons = 5;
+    const numOfPages = Math.ceil(list.length / 9)
     const linkList = document.querySelector(".link-list");
     linkList.innerHTML = ''
-    for (i = 1; i <= numPaginationButtons; i++) {
+    for (i = 1; i <= numOfPages; i++) {
         const buttonHTML = `
             <li>
                 <button type="button">${[i]}</button>
@@ -120,6 +120,7 @@ paginationButtons(data);
 submit.addEventListener('click', (event) => {
     event.preventDefault;
     performSearch(search, data);
+    
 });
 
 search.addEventListener('keyup', () => {
