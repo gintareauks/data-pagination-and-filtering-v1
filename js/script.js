@@ -25,8 +25,8 @@ displaySearchBar()
 function showPage(list, page) {
     let startIndex = (page * 9) - 9;
     let endIndex = page * 9;
-    const studentList = document.querySelector(".student-list")
-    studentList.innerHTML = ''
+    const studentList = document.querySelector(".student-list");
+    studentList.innerHTML = '';
 
     for (i = 0; i < list.length; i++) {
         if (i >= startIndex && i < endIndex) {
@@ -50,9 +50,9 @@ function showPage(list, page) {
 
 // Displays pagination buttons and shows which one is active
 function addPagination(list) {
-    const numOfPages = Math.ceil(list.length / 9)
+    const numOfPages = Math.ceil(list.length / 9);
     const linkList = document.querySelector(".link-list");
-    linkList.innerHTML = ''
+    linkList.innerHTML = '';
     for (i = 1; i <= numOfPages; i++) {
         const buttonHTML = `
             <li>
@@ -83,7 +83,7 @@ function performSearch(searchInput, list) {
     let filtered = [];
 
     for (i = 0; i < list.length; i++) {
-        let name = `${list[i].name.first.toLowerCase()} ${list[i].name.last.toLowerCase()}` 
+        let name = `${list[i].name.first.toLowerCase()} ${list[i].name.last.toLowerCase()}`; 
 
         if (searchInput.value.length > 0 && name.includes(searchInput.value.toLowerCase())) {
             filtered.push(list[i]);
@@ -91,31 +91,31 @@ function performSearch(searchInput, list) {
     }
 
     if(search.value.length == ''){
-        showPage(data, 1);
-        addPagination(data);   
+        showPage(data, 1)
+        addPagination(data)  
     } else if (filtered.length > 0 && search.value.length > 0) {
-        showPage(filtered, 1);
+        showPage(filtered, 1)
         addPagination(filtered) 
     } else if (filtered.length === 0 && search.value.length > 0) {
-        const studentList = document.querySelector(".student-list")
+        const studentList = document.querySelector(".student-list");
         studentList.innerHTML = `<p>No results found</p>`;
-        addPagination(filtered);
+        addPagination(filtered)
     }
 }
 
 
 // Call functions
-showPage(data, 1);
-addPagination(data);
+showPage(data, 1)
+addPagination(data)
 
 
 // Search made responsive
 submit.addEventListener('click', (event) => {
     event.preventDefault;
-    performSearch(search, data);
+    performSearch(search, data)
 });
 
 search.addEventListener('keyup', () => {
-    performSearch(search, data);
+    performSearch(search, data)
 })
 
